@@ -1,8 +1,14 @@
 function handle_click(item_json) {
 
-    Cookies.set("selected_item", item_json);
-
+    var selected_item_json = Cookies.get("selected_item");
+    var selected_clothes = JSON.parse(selected_item_json);
+    var item = JSON.parse(item_json);
+    selected_clothes.push(item);
+    selected_clothes_json = JSON.stringify(selected_clothes);
+    Cookies.set("selected_item", selected_clothes_json);
+    
 }
+
 
 function add_menu_item(item) {
     // Selecting a parent container for the article
@@ -11,8 +17,8 @@ function add_menu_item(item) {
         var menu_card = document.createElement("article");
     // Assgning a class to new element
         menu_card.classList.add("card_container");
-        //var item_json = JSON.stringify(item);
-        //menu_card.setAttribute('onclick', `handle_click('${item_json}')`);
+        var item_json = JSON.stringify(item);
+        menu_card.setAttribute('onclick', `handle_click('${item_json}')`);
         //menu_card['onclick'] = handle_click;
      
         var card_image = document.createElement("img");
@@ -67,7 +73,7 @@ var menu_items = [
         price: "CA$54.95"
     },
     {
-        name: "100% Recycled Polyester Cropped Puffer Jacket",
+        name: "100% Recycled Polyesterpwd Cropped Puffer Jacket",
         description: "This jacket is made with 100% recycled polyester. Less waste in the world",
         image_src: "../images/6.jpg",
         price: "CA$178.00"
@@ -90,3 +96,6 @@ for(var i=0; i < menu_items.length; i++) {
     add_menu_item(menu_items[i]);
 
 }
+
+var selected_item = [];
+Cookies.set("selected_item", JSON.stringify(selected_item));

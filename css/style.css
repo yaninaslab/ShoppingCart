@@ -42,6 +42,14 @@ button {
     margin: 20px;
 }
 button a {
+    color: deeppink;
+    text-decoration: none;
+    font-size: large;
+    font-weight: bold;
+}
+.delete_btn {
+    
+    color: deeppink;
     text-decoration: none;
     font-size: large;
     font-weight: bold;
