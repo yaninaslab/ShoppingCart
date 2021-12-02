@@ -1,4 +1,20 @@
 
+function delete_item() {
+    var deleted_card = this['parentNode'];
+    var item_name = deleted_card.childNodes[1]['innerText'];
+    deleted_card.remove();
+    var selected_item_json = Cookies.get("selected_item");
+    var selected_clothes = JSON.parse(selected_item_json);
+    for(var i=0; i < selected_clothes.length; i++) {
+        if(selected_clothes[i]['name'] == item_name) {
+            selected_clothes.splice(i, 1);
+            i = selected_clothes.length
+        }
+    }
+    selected_clothes_json = JSON.stringify(selected_clothes);
+    Cookies.set("selected_item", selected_clothes_json);
+}
+
 
 function add_menu_item(item) {
     // Selecting a parent container for the article
@@ -26,6 +42,7 @@ function add_menu_item(item) {
         var delete_btn = document.createElement('button');
         delete_btn.classList.add("delete_btn");
         delete_btn.innerText = "Delete";
+        delete_btn.addEventListener('click', delete_item);
     
         menu_card.appendChild(card_image);
         menu_card.appendChild(card_title);
