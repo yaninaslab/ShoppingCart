@@ -40,6 +40,10 @@ img {
 }
 button {
     margin: 20px;
+    color: deeppink;
+    text-decoration: none;
+    font-size: large;
+    font-weight: bold;
 }
 button a {
     color: deeppink;

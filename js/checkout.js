@@ -15,6 +15,13 @@ function delete_item() {
     Cookies.set("selected_item", selected_clothes_json);
 }
 
+function empty_cart() {
+    var deleted_card = this['parentNode'];
+    var item_name = deleted_card.childNodes[1]['innerText'];
+    deleted_card.remove();
+    Cookies.remove("selected_item");
+}
+document.getElementById('empty_cart').addEventListener('click', empty_cart);
 
 function add_menu_item(item) {
     // Selecting a parent container for the article
@@ -63,3 +70,4 @@ function add_menu_item(item) {
         alert("You haven't picked anything. Please go back to the selection page!");
         
     }
+
