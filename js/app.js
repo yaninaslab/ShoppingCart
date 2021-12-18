@@ -1,5 +1,5 @@
 function handle_click(item_json) {
-
+// Setting cookies in 5 steps - get cookies, parse cookies, push to array, stringify cookies and set them.
     var selected_item_json = Cookies.get("selected_item");
     var selected_clothes = JSON.parse(selected_item_json);
     var item = JSON.parse(item_json);
@@ -96,6 +96,6 @@ for(var i=0; i < menu_items.length; i++) {
     add_menu_item(menu_items[i]);
 
 }
-
+// Creating an empty array for selected clothes items and setting cookies to pass there
 var selected_item = [];
 Cookies.set("selected_item", JSON.stringify(selected_item));

@@ -1,11 +1,13 @@
-
+// Function that deletes items by clicking on Delete button on the card.
 function delete_item() {
+    // We're gabbing the 'article' element here
     var deleted_card = this['parentNode'];
+    // Grabbing 'h3' tag which is the second element in the array
     var item_name = deleted_card.childNodes[1]['innerText'];
-    // Remove card from DOM
+    // Removing card from DOM
     deleted_card.remove();
     
-    // Remove card from Cookies
+    // Removing card from cookies
     var selected_item_json = Cookies.get("selected_item");
     var selected_clothes = JSON.parse(selected_item_json);
     for(var i=0; i < selected_clothes.length; i++) {
@@ -17,16 +19,20 @@ function delete_item() {
     // var deleted_card_index = selected_clothes.find(item => item.name === item_name);
     // selected_clothes.splice(deleted_card_index, 1)
 
-    selected_clothes_json = JSON.stringify(selected_clothes);
-    Cookies.set("selected_item", selected_clothes_json);
+    //selected_clothes_json = JSON.stringify(selected_clothes);
+    //Cookies.set("selected_item", selected_clothes_json);
 }
-
+// This function empties the entire cart by removing 'cart_containter' from DOM.
 function empty_cart() {
     cart_containter.remove();
+    // This removes cookies.
     Cookies.remove("selected_item");
 }
+// Adding an event to the button
 document.getElementById('empty_cart').addEventListener('click', empty_cart);
+// Grabing the element from the page which is required by all items in the array.
 var cart_containter = document.getElementById("menu_container");
+// This function adds clothes items to the page based on what items were selected (cookies)
 function add_menu_item(item) {
     // Setting up a variable and assigning a tag to it
         var menu_card = document.createElement("article");
@@ -61,13 +67,13 @@ function add_menu_item(item) {
         cart_containter.appendChild(menu_card);
     
     }
-
+// This is a loop for adding clothes items
     var selected_item_json = Cookies.get("selected_item");
     var selected_clothes = JSON.parse(selected_item_json);
     for(var i=0; i < selected_clothes.length; i++) {
         add_menu_item(selected_clothes[i]);
     }
-    
+    // This message promts the user to select items if nothing has been selected
     if(selected_clothes == 0) {
         alert("You haven't picked anything. Please go back to the selection page!");
         
