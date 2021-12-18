@@ -2,30 +2,32 @@
 function delete_item() {
     var deleted_card = this['parentNode'];
     var item_name = deleted_card.childNodes[1]['innerText'];
+    // Remove card from DOM
     deleted_card.remove();
+    
+    // Remove card from Cookies
     var selected_item_json = Cookies.get("selected_item");
     var selected_clothes = JSON.parse(selected_item_json);
     for(var i=0; i < selected_clothes.length; i++) {
         if(selected_clothes[i]['name'] == item_name) {
             selected_clothes.splice(i, 1);
-            i = selected_clothes.length
+            i = selected_clothes.length // break;
         }
     }
+    // var deleted_card_index = selected_clothes.find(item => item.name === item_name);
+    // selected_clothes.splice(deleted_card_index, 1)
+
     selected_clothes_json = JSON.stringify(selected_clothes);
     Cookies.set("selected_item", selected_clothes_json);
 }
 
 function empty_cart() {
-    var deleted_card = this['parentNode'];
-    var item_name = deleted_card.childNodes[1]['innerText'];
-    deleted_card.remove();
+    cart_containter.remove();
     Cookies.remove("selected_item");
 }
 document.getElementById('empty_cart').addEventListener('click', empty_cart);
-
+var cart_containter = document.getElementById("menu_container");
 function add_menu_item(item) {
-    // Selecting a parent container for the article
-        var parent_containter = document.getElementById("menu_container");
     // Setting up a variable and assigning a tag to it
         var menu_card = document.createElement("article");
     // Assgning a class to new element
@@ -56,7 +58,7 @@ function add_menu_item(item) {
         menu_card.appendChild(card_description);
         menu_card.appendChild(card_price);
         menu_card.appendChild(delete_btn);
-        parent_containter.appendChild(menu_card);
+        cart_containter.appendChild(menu_card);
     
     }
 
